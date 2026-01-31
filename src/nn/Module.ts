@@ -114,7 +114,7 @@ export abstract class BaseModule implements Module {
     }
     
     return {
-      id: `${name}_${Math.random().toString(36).substr(2, 9)}`,
+      id: `${name}_${Math.random().toString(36).substring(2, 11)}`,
       shape,
       data,
       dtype: 'f32',

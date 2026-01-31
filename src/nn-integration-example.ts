@@ -282,7 +282,7 @@ export class CognitiveStatePredictor {
    */
   private arrayToTensor(arr: Float32Array, name: string): GgmlTensor {
     return {
-      id: `${name}_${Math.random().toString(36).substr(2, 9)}`,
+      id: `${name}_${Math.random().toString(36).substring(2, 11)}`,
       shape: [1, arr.length],
       data: new Float32Array(arr),
       dtype: 'f32',

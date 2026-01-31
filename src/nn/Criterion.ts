@@ -33,7 +33,7 @@ export class MSECriterion implements Criterion {
   
   backward(input: GgmlTensor, target: GgmlTensor): GgmlTensor {
     const gradInput: GgmlTensor = {
-      id: `grad_mse_${Math.random().toString(36).substr(2, 9)}`,
+      id: `grad_mse_${Math.random().toString(36).substring(2, 11)}`,
       shape: input.shape,
       data: new Float32Array(input.data.length),
       dtype: 'f32',
@@ -80,7 +80,7 @@ export class CrossEntropyCriterion implements Criterion {
   
   backward(input: GgmlTensor, target: GgmlTensor): GgmlTensor {
     const gradInput: GgmlTensor = {
-      id: `grad_ce_${Math.random().toString(36).substr(2, 9)}`,
+      id: `grad_ce_${Math.random().toString(36).substring(2, 11)}`,
       shape: input.shape,
       data: new Float32Array(input.data.length),
       dtype: 'f32',
@@ -135,7 +135,7 @@ export class NLLCriterion implements Criterion {
   
   backward(input: GgmlTensor, target: GgmlTensor): GgmlTensor {
     const gradInput: GgmlTensor = {
-      id: `grad_nll_${Math.random().toString(36).substr(2, 9)}`,
+      id: `grad_nll_${Math.random().toString(36).substring(2, 11)}`,
       shape: input.shape,
       data: new Float32Array(input.data.length),
       dtype: 'f32',
@@ -181,7 +181,7 @@ export class BCECriterion implements Criterion {
   
   backward(input: GgmlTensor, target: GgmlTensor): GgmlTensor {
     const gradInput: GgmlTensor = {
-      id: `grad_bce_${Math.random().toString(36).substr(2, 9)}`,
+      id: `grad_bce_${Math.random().toString(36).substring(2, 11)}`,
       shape: input.shape,
       data: new Float32Array(input.data.length),
       dtype: 'f32',
@@ -217,7 +217,7 @@ export class L1Criterion implements Criterion {
   
   backward(input: GgmlTensor, target: GgmlTensor): GgmlTensor {
     const gradInput: GgmlTensor = {
-      id: `grad_l1_${Math.random().toString(36).substr(2, 9)}`,
+      id: `grad_l1_${Math.random().toString(36).substring(2, 11)}`,
       shape: input.shape,
       data: new Float32Array(input.data.length),
       dtype: 'f32',
@@ -253,7 +253,7 @@ export class SmoothL1Criterion implements Criterion {
   
   backward(input: GgmlTensor, target: GgmlTensor): GgmlTensor {
     const gradInput: GgmlTensor = {
-      id: `grad_smoothl1_${Math.random().toString(36).substr(2, 9)}`,
+      id: `grad_smoothl1_${Math.random().toString(36).substring(2, 11)}`,
       shape: input.shape,
       data: new Float32Array(input.data.length),
       dtype: 'f32',

@@ -25,7 +25,7 @@ function createTensor(shape: number[], values?: number[]): GgmlTensor {
   }
   
   return {
-    id: `test_${Math.random().toString(36).substr(2, 9)}`,
+    id: `test_${Math.random().toString(36).substring(2, 11)}`,
     shape,
     data,
     dtype: 'f32',
