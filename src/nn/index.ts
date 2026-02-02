@@ -80,6 +80,23 @@ export {
   SmoothL1Criterion
 } from './Criterion.js';
 
+// Prime-shaped nested tensor tuples (NanoBrain Chapter 7)
+export {
+  QuaternionModule,
+  OctonionModule,
+  DodecanionModule,
+  NestedTensorTransformer,
+  H3DecisionModule,
+  PrimeTensorContainer,
+  PRIME_DIMENSIONS,
+  FUNDAMENTAL_PRIMES
+} from './PrimeShapedTensors.js';
+
+export type {
+  PrimeShapedTensor,
+  NestedTensorTuple
+} from './PrimeShapedTensors.js';
+
 /**
  * Initialize module parameters using Xavier/Glorot initialization
  */
