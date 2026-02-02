@@ -385,9 +385,10 @@ try {
   process.exit(1);
 }
 
-console.log('='.repeat(60));
+const SEPARATOR_WIDTH = 60;
+console.log('='.repeat(SEPARATOR_WIDTH));
 console.log('✓ All Prime-Shaped Nested Tensor Tuple tests passed!');
-console.log('='.repeat(60));
+console.log('='.repeat(SEPARATOR_WIDTH));
 console.log('\nImplementation Summary:');
 console.log('- QuaternionModule: 4D sensory processing (primes 2,3,5)');
 console.log('- OctonionModule: 8D pathway fusion (primes 7,11,13)');

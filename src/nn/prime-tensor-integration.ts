@@ -30,6 +30,17 @@ import { ReLU, Tanh } from './Activation.js';
 import { MSECriterion } from './Criterion.js';
 
 /**
+ * H3 Triplet Scaling Factors
+ * 
+ * Based on Chapter 7 Section 7.8: H3 Decision Device
+ * The three inputs (primary, secondary, context) are weighted differently
+ * to represent their relative importance in decision-making.
+ */
+const H3_PRIMARY_SCALE = 1.0;    // Primary input (full weight)
+const H3_SECONDARY_SCALE = 0.8;  // Secondary input (reduced emphasis)
+const H3_CONTEXT_SCALE = 1.2;    // Context input (enhanced influence)
+
+/**
  * Complete Time Crystal Brain Model
  * 
  * Implements the full architecture from Chapter 7:
@@ -202,13 +213,13 @@ Based on NanoBrain Chapter 7: Time Crystal Brain Model
       name: 'h3_input'
     };
     
-    // Fill with cortical data (replicated 3 times)
+    // Fill with cortical data (replicated 3 times with scaling)
     for (let i = 0; i < batchSize; i++) {
       for (let j = 0; j < corticalSize; j++) {
         const value = cortical.data[i * corticalSize + j];
-        h3Input.data[i * h3InputSize + j] = value; // Primary
-        h3Input.data[i * h3InputSize + corticalSize + j] = value * 0.8; // Secondary
-        h3Input.data[i * h3InputSize + 2 * corticalSize + j] = value * 1.2; // Context
+        h3Input.data[i * h3InputSize + j] = value * H3_PRIMARY_SCALE;
+        h3Input.data[i * h3InputSize + corticalSize + j] = value * H3_SECONDARY_SCALE;
+        h3Input.data[i * h3InputSize + 2 * corticalSize + j] = value * H3_CONTEXT_SCALE;
       }
     }
     
@@ -229,13 +240,13 @@ Based on NanoBrain Chapter 7: Time Crystal Brain Model
       name: 'grad_cortical'
     };
     
-    // Sum gradients from all three H3 inputs
+    // Sum gradients from all three H3 inputs (with matching scales)
     for (let i = 0; i < batchSize; i++) {
       for (let j = 0; j < corticalSize; j++) {
         gradCortical.data[i * corticalSize + j] = 
-          gradH3Input.data[i * h3InputSize + j] +
-          gradH3Input.data[i * h3InputSize + corticalSize + j] * 0.8 +
-          gradH3Input.data[i * h3InputSize + 2 * corticalSize + j] * 1.2;
+          gradH3Input.data[i * h3InputSize + j] * H3_PRIMARY_SCALE +
+          gradH3Input.data[i * h3InputSize + corticalSize + j] * H3_SECONDARY_SCALE +
+          gradH3Input.data[i * h3InputSize + 2 * corticalSize + j] * H3_CONTEXT_SCALE;
       }
     }
     
@@ -407,11 +418,13 @@ export async function trainTimeCrystalModel(
 /**
  * Demonstration function
  */
+const DEMO_SEPARATOR_WIDTH = 70;
+
 export function demonstratePrimeTensors(): void {
-  console.log('='.repeat(70));
+  console.log('='.repeat(DEMO_SEPARATOR_WIDTH));
   console.log('Prime-Shaped Nested Tensor Tuples - Integration Demonstration');
   console.log('Based on NanoBrain Chapter 7: Time Crystal Brain Model');
-  console.log('='.repeat(70));
+  console.log('='.repeat(DEMO_SEPARATOR_WIDTH));
   console.log('');
   
   // Example 1: Simple cognitive classifier
@@ -441,9 +454,9 @@ export function demonstratePrimeTensors(): void {
   console.log(`   - Dodecanion: ${PRIME_DIMENSIONS.DODECANION}D (cortical)`);
   console.log('');
   
-  console.log('='.repeat(70));
+  console.log('='.repeat(DEMO_SEPARATOR_WIDTH));
   console.log('Demonstration completed successfully!');
-  console.log('='.repeat(70));
+  console.log('='.repeat(DEMO_SEPARATOR_WIDTH));
 }
 
 // Run demonstration if this file is executed directly
