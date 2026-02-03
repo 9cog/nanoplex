@@ -319,6 +319,220 @@ Contributions are welcome! Please ensure new modules:
 - Provide comprehensive tests
 - Follow TypeScript best practices
 
+## Prime-Shaped Nested Tensor Tuples (Chapter 7)
+
+### Overview
+
+This implementation includes specialized modules for processing prime-shaped nested tensor tuples as described in **NanoBrain Chapter 7: Time Crystal Brain Model**. These modules implement the quaternion-octonion-dodecanion architecture that mirrors the brain's hierarchical processing.
+
+### Key Concepts
+
+The brain processes information through three nested levels of prime-shaped tensors:
+
+1. **Quaternion (4D)**: Sensory input processing with spatial primes [2, 3, 5]
+2. **Octonion (8D)**: Pathway/midbrain fusion with temporal primes [7, 11, 13]
+3. **Dodecanion (12D)**: Cortical manifolds with consciousness primes [29, 31, 37]
+
+The complete transformation pipeline: **d4D → d8D → d12D**
+
+### Prime-Shaped Modules
+
+#### QuaternionModule (4D)
+
+Processes sensory input into 4D quaternion space:
+
+```typescript
+import { QuaternionModule } from './nn';
+
+const quatModule = new QuaternionModule(
+  64,           // input size
+  [2, 3, 5]     // spatial primes
+);
+
+const quaternionOutput = quatModule.forward(sensorInput);
+```
+
+#### OctonionModule (8D)
+
+Fuses information into 8D octonion space with non-commutative properties:
+
+```typescript
+import { OctonionModule } from './nn';
+
+const octModule = new OctonionModule(
+  4,            // input size (from quaternion)
+  [7, 11, 13]   // temporal primes
+);
+
+const octonionOutput = octModule.forward(quaternionOutput);
+```
+
+#### DodecanionModule (12D)
+
+Processes abstract thought in 12D dodecanion manifolds:
+
+```typescript
+import { DodecanionModule } from './nn';
+
+const dodModule = new DodecanionModule(
+  8,            // input size (from octonion)
+  [29, 31, 37]  // consciousness primes
+);
+
+const dodecanionOutput = dodModule.forward(octonionOutput);
+```
+
+### NestedTensorTransformer
+
+Complete pipeline for d4D → d8D → d12D transformation:
+
+```typescript
+import { NestedTensorTransformer } from './nn';
+
+const transformer = new NestedTensorTransformer(64); // input size
+
+// Get final 12D output
+const output = transformer.forward(input);
+
+// Get all intermediate tensors
+const nestedTuple = transformer.forwardNested(input);
+console.log(nestedTuple.quaternion);  // 4D sensory
+console.log(nestedTuple.octonion);    // 8D pathway
+console.log(nestedTuple.dodecanion);  // 12D cortical
+```
+
+### H3DecisionModule
+
+Implements the triplet decision-making unit (Section 7.8):
+
+```typescript
+import { H3DecisionModule } from './nn';
+
+const h3 = new H3DecisionModule(
+  12,  // input size (from dodecanion)
+  1    // output size (decision)
+);
+
+// Three inputs: H₁ (primary), H₂ (secondary), H₃ (context)
+const decision = h3.forwardH3(h1, h2, h3);
+```
+
+### Complete Time Crystal Brain Model
+
+Full integration example:
+
+```typescript
+import { 
+  TimeCrystalBrainModel,
+  createCognitivePatternClassifier 
+} from './nn/prime-tensor-integration';
+
+// Create complete brain model
+const brainModel = new TimeCrystalBrainModel(
+  64,  // input size
+  10   // output classes
+);
+
+// Forward pass
+const { decision, nestedTuple } = brainModel.forward(input);
+
+// Training
+brainModel.train();
+brainModel.zeroGradParameters();
+const gradInput = brainModel.backward(input, gradDecision);
+brainModel.updateParameters(0.01);
+
+// Summary
+console.log(brainModel.summary());
+```
+
+### Multi-Sensory Integration
+
+Process multiple sensory modalities:
+
+```typescript
+import { MultiSensoryIntegrationModel } from './nn/prime-tensor-integration';
+
+const multiSensory = new MultiSensoryIntegrationModel(
+  32,  // visual input size
+  24,  // auditory input size
+  16   // tactile input size
+);
+
+const {
+  visualQuaternion,
+  auditoryQuaternion,
+  tactileQuaternion,
+  fusedOctonion,
+  corticalDodecanion
+} = multiSensory.forward(visualInput, auditoryInput, tactileInput);
+```
+
+### PrimeTensorContainer
+
+Organize and manage prime-shaped tensors:
+
+```typescript
+import { PrimeTensorContainer } from './nn';
+
+const container = new PrimeTensorContainer();
+
+// Add tensors
+container.add('sensory', primeShapedQuaternion);
+container.add('pathway', primeShapedOctonion);
+container.add('cortical', primeShapedDodecanion);
+
+// Query tensors
+const quaternions = container.getByType('quaternion');
+const spatialTensors = container.getByPrime(2); // tensors with prime 2
+
+// Get statistics
+const summary = container.summary();
+console.log(summary.byType);   // { quaternion: 1, octonion: 1, dodecanion: 1 }
+console.log(summary.byPrime);  // { 2: 1, 3: 1, 5: 1, ... }
+```
+
+### Constants
+
+```typescript
+import { PRIME_DIMENSIONS, FUNDAMENTAL_PRIMES } from './nn';
+
+console.log(PRIME_DIMENSIONS.QUATERNION);   // 4
+console.log(PRIME_DIMENSIONS.OCTONION);     // 8
+console.log(PRIME_DIMENSIONS.DODECANION);   // 12
+
+console.log(FUNDAMENTAL_PRIMES);
+// [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47]
+```
+
+### Testing
+
+Run the prime tensor test suite:
+
+```bash
+npm run test:prime-tensors
+# or
+node src/nn/test-prime-tensors.ts
+```
+
+### Theoretical Foundation
+
+These modules implement the **Time Crystal Brain Model** from NanoBrain Chapter 7, which describes how:
+
+- The brain uses prime number patterns at all organizational scales
+- Information flows through nested dimensional transformations (4D → 8D → 12D)
+- Consciousness emerges from 12D dodecanion manifolds
+- Decision-making uses triplet H3 units at all neural scales
+- Multi-dimensional algebras (quaternions, octonions, dodecanions) enable efficient cognitive processing
+
+### References
+
+- NanoBrain Chapter 7: Complete Time Crystal Brain Model
+- Section 7.1.1: Four, Eight, and Twelve Imaginary Worlds
+- Section 7.7: Brain's Wheel of Primes (Octonion)
+- Section 7.8: H3 Decision Device
+- Section 7.11: Hexagonal Prime Lattice
+
 ## License
 
 MIT License - Same as the parent NanoBrain project
@@ -328,3 +542,4 @@ MIT License - Same as the parent NanoBrain project
 - [torch/nn GitHub Repository](https://github.com/torch/nn)
 - [Torch7 Documentation](http://torch.ch/)
 - [NanoBrain Cognitive Architecture](../README.md)
+- [NanoBrain Chapter 7: Time Crystal Brain Model](../../docs/CHAPTER_7_SUMMARY.md)
