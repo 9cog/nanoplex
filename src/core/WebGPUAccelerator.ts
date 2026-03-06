@@ -582,7 +582,7 @@ export class WebGPUAccelerator {
    * Cleanup GPU resources
    */
   public destroy(): void {
-    for (const pipeline of this.pipelines.values()) {
+    for (const _pipeline of this.pipelines.values()) {
       // Pipelines are automatically cleaned up
     }
     this.pipelines.clear();

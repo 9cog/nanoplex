@@ -25,14 +25,14 @@ import {
   SGDOptimizer,
   AdamOptimizer,
   AdamWOptimizer,
-  RMSpropOptimizer,
-  AdagradOptimizer,
+  RMSpropOptimizer as _RMSpropOptimizer,
+  AdagradOptimizer as _AdagradOptimizer,
   StepLRScheduler,
   ExponentialLRScheduler,
   CosineAnnealingLRScheduler,
-  ReduceLROnPlateauScheduler,
+  ReduceLROnPlateauScheduler as _ReduceLROnPlateauScheduler,
   WarmupLRScheduler,
-  OneCycleLRScheduler,
+  OneCycleLRScheduler as _OneCycleLRScheduler,
   createOptimizer,
   createScheduler
 } from '../core/AdvancedOptimizers';
@@ -47,23 +47,23 @@ import {
 
 import {
   KernelCompositionEngine,
-  ComposedKernel,
+  ComposedKernel as _ComposedKernel,
   MultiDomainProblem
 } from '../core/KernelCompositionEngine';
 
 import {
   MAMLLearner,
   PrototypicalNetwork,
-  MultiTaskLearner,
+  MultiTaskLearner as _MultiTaskLearner,
   EWCLearner,
   EvolutionaryNAS,
   MetaTaskGenerator
 } from '../core/MetaLearningEngine';
 
 import {
-  ASTNode,
+  ASTNode as _ASTNode,
   ASTBuilder,
-  ASTVisitor,
+  ASTVisitor as _ASTVisitor,
   TypeScriptGenerator,
   PythonGenerator,
   ProgramSynthesizer,
@@ -565,8 +565,8 @@ describe('Kernel Composition Engine', () => {
   });
 
   test('parallel composition combines kernels with weights', () => {
-    const k1 = (x: number[], y: number[]) => 1;
-    const k2 = (x: number[], y: number[]) => 2;
+    const k1 = (_x: number[], _y: number[]) => 1;
+    const k2 = (_x: number[], _y: number[]) => 2;
 
     engine.registerKernel(k1, 'one');
     engine.registerKernel(k2, 'two');
@@ -700,7 +700,7 @@ describe('Meta-Learning Engine', () => {
       });
 
       nas.initializePopulation();
-      const fitnessFunc = (arch: any) => Math.random();
+      const fitnessFunc = (_arch: unknown) => Math.random();
 
       nas.evolve(fitnessFunc, 1);
 
@@ -1222,7 +1222,7 @@ describe('Integration Tests', () => {
     );
 
     // Compose adaptively
-    const composed = engine.composeKernels(['linear', 'rbf'], 'adaptive');
+    const _composed = engine.composeKernels(['linear', 'rbf'], 'adaptive');
 
     // Use in multi-domain problem
     const problem: MultiDomainProblem = {

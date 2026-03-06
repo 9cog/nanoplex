@@ -1,5 +1,5 @@
 import React from 'react';
-import { Lightbulb, Target, Route, Brain, Zap, GitBranch, Languages, Triangle } from 'lucide-react';
+import { Route, Brain, Zap, Languages, Triangle } from 'lucide-react';
 
 // Sections 1.6-1.11: Remaining Chapter 1 Sections
 export const RemainingChapter1Sections: React.FC<{ section: string }> = ({ section }) => {

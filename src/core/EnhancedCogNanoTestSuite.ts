@@ -29,7 +29,7 @@ import {
 } from './CognitiveGripFabric';
 
 import {
-  EnhancedCogNanoAgent,
+  EnhancedCogNanoAgent as _EnhancedCogNanoAgent,
   createEnhancedCogNanoAgent,
   CogNanoExamples
 } from './EnhancedCogNanoAgent';

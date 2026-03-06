@@ -512,12 +512,10 @@ export class MultiTaskLearner {
     lr: number = 0.001
   ): Map<string, number> {
     const losses = new Map<string, number>();
-    let totalWeightedLoss = 0;
 
     // Compute loss for each task
     for (const [taskId, examples] of taskBatches) {
       const head = this.taskHeads.get(taskId);
-      const weight = this.taskWeights.get(taskId) ?? 1.0;
 
       if (!head) continue;
 
@@ -540,7 +538,6 @@ export class MultiTaskLearner {
 
       taskLoss /= examples.length;
       losses.set(taskId, taskLoss);
-      totalWeightedLoss += weight * taskLoss;
     }
 
     // Update all parameters
@@ -957,9 +954,11 @@ export class EvolutionaryNAS {
       if (Math.random() < this.mutationRate) {
         // Replace with random layer
         layers[i] = this.randomLayer();
-      } else if (Math.random() < this.mutationRate) {
-        // Mutate parameters
-        layers[i] = this.mutateLayer(layers[i]);
+      } else {
+        // Small chance to mutate parameters
+        if (Math.random() < this.mutationRate) {
+          layers[i] = this.mutateLayer(layers[i]);
+        }
       }
     }
 

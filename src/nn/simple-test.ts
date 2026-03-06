@@ -3,7 +3,7 @@
  */
 
 import { Linear } from './Linear.js';
-import { ReLU, Sigmoid, Softmax } from './Activation.js';
+import { ReLU, Softmax } from './Activation.js';
 import { Sequential } from './Container.js';
 import { MSECriterion } from './Criterion.js';
 import { GgmlTensor } from '../core/GgmlTensorKernel.js';

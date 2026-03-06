@@ -15,7 +15,6 @@ import {
   PrimeTensorContainer,
   PRIME_DIMENSIONS,
   FUNDAMENTAL_PRIMES,
-  PrimeShapedTensor,
   NestedTensorTuple
 } from './PrimeShapedTensors.js';
 
@@ -364,7 +363,7 @@ try {
   const nestedOutput = transformer.forwardNested(sensoryInput);
   
   // Make decision based on cortical output
-  const corticalTensor = nestedOutput.dodecanion.tensor;
+  const _corticalTensor = nestedOutput.dodecanion.tensor;
   const decisionInput = createTestTensor([4, 36], 0.5); // 3 * 12 for H3
   const decision = h3Decision.forward(decisionInput);
   

@@ -10,7 +10,7 @@
  * - System orchestration monitor
  */
 
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   Brain,
   Layers,
@@ -19,13 +19,9 @@ import {
   Cpu,
   Activity,
   Zap,
-  Network,
   Target,
-  Play,
   Settings,
-  BarChart3,
   RefreshCw,
-  ChevronRight,
   Check,
   AlertCircle,
   Clock

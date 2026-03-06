@@ -1068,7 +1068,7 @@ export class CodeAnalyzer {
         }
         break;
 
-      case NodeType.FUNCTION:
+      case NodeType.FUNCTION: {
         const funcNode = node as FunctionNode;
         const localVars = new Set(declaredVars);
         funcNode.parameters.forEach(p => localVars.add(p.name));
@@ -1083,14 +1083,16 @@ export class CodeAnalyzer {
 
         this.traverseForIssues(funcNode.body, issues, localVars);
         break;
+      }
 
-      case NodeType.ASSIGNMENT:
+      case NodeType.ASSIGNMENT: {
         const assignNode = node as AssignmentNode;
         if (assignNode.target.type === NodeType.IDENTIFIER) {
           declaredVars.add((assignNode.target as IdentifierNode).name);
         }
         this.traverseForIssues(assignNode.value, issues, declaredVars);
         break;
+      }
 
       case NodeType.BLOCK:
         for (const stmt of (node as BlockNode).statements) {
@@ -1098,7 +1100,7 @@ export class CodeAnalyzer {
         }
         break;
 
-      case NodeType.IF:
+      case NodeType.IF: {
         const ifNode = node as IfNode;
         this.traverseForIssues(ifNode.condition, issues, declaredVars);
         this.traverseForIssues(ifNode.consequent, issues, declaredVars);
@@ -1106,6 +1108,7 @@ export class CodeAnalyzer {
           this.traverseForIssues(ifNode.alternate, issues, declaredVars);
         }
         break;
+      }
 
       case NodeType.PROGRAM:
         for (const stmt of (node as ProgramNode).body) {
@@ -1238,14 +1241,15 @@ export class CodeOptimizer {
         return { ...node, body: mapper((node as FunctionNode).body) as BlockNode } as FunctionNode;
       case NodeType.BLOCK:
         return { ...node, statements: (node as BlockNode).statements.map(mapper) } as BlockNode;
-      case NodeType.IF:
-        const ifNode = node as IfNode;
+      case NodeType.IF: {
+        const ifNodeToMap = node as IfNode;
         return {
           ...node,
-          condition: mapper(ifNode.condition),
-          consequent: mapper(ifNode.consequent) as BlockNode,
-          alternate: ifNode.alternate ? mapper(ifNode.alternate) as BlockNode | IfNode : undefined
+          condition: mapper(ifNodeToMap.condition),
+          consequent: mapper(ifNodeToMap.consequent) as BlockNode,
+          alternate: ifNodeToMap.alternate ? mapper(ifNodeToMap.alternate) as BlockNode | IfNode : undefined
         } as IfNode;
+      }
       case NodeType.BINARY_OP:
         return {
           ...node,

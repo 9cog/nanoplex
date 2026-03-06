@@ -13,10 +13,7 @@ import {
   UniversalKernelGenerator,
   GeneratedKernel,
   DomainSpecification,
-  GripMetrics,
-  BSeriesCoefficients,
-  RootedTree,
-  ContextTensor
+  GripMetrics
 } from './UniversalKernelGenerator';
 
 // ============================================================================
@@ -402,7 +399,7 @@ export class KernelCompositionEngine {
         }
         break;
 
-      case CombinationMethod.ATTENTION:
+      case CombinationMethod.ATTENTION: {
         // Attention-based combination using grip quality as attention scores
         const attentionScores = kernels.map(k => k.grip.overall);
         const attentionSum = attentionScores.reduce((a, b) => a + b, 0);
@@ -415,6 +412,7 @@ export class KernelCompositionEngine {
           }
         }
         break;
+      }
     }
 
     return result;
@@ -657,11 +655,12 @@ export class KernelCompositionEngine {
     let composed: ComposedKernel;
 
     switch (strategy) {
-      case CompositionStrategy.SEQUENTIAL:
+      case CompositionStrategy.SEQUENTIAL: {
         // Order kernels based on dependencies
         const orderedKernels = this.orderByDependencies(domainKernels, problem.constraints);
         composed = this.composeSequential(orderedKernels, problem.name);
         break;
+      }
 
       case CompositionStrategy.PARALLEL:
         composed = this.composeParallel(
@@ -672,10 +671,11 @@ export class KernelCompositionEngine {
         );
         break;
 
-      case CompositionStrategy.HIERARCHICAL:
+      case CompositionStrategy.HIERARCHICAL: {
         const hierarchy = this.buildOptimalHierarchy(domainKernels, problem);
         composed = this.composeHierarchical(hierarchy, problem.name);
         break;
+      }
 
       case CompositionStrategy.ADAPTIVE:
         composed = this.composeAdaptive(domainKernels, problem);
