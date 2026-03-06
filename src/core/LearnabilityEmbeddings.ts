@@ -11,7 +11,7 @@
  * - Learnable parameters with gradient tracking
  */
 
-import { GgmlTensor, TensorContext } from './GgmlTensorKernel';
+import { GgmlTensor } from './GgmlTensorKernel';
 
 /**
  * Base neural network module interface (inspired by nn.Module)
@@ -225,7 +225,7 @@ export class TanhModule implements NNModule {
     return gradInput;
   }
   
-  updateParameters(learningRate: number): void {
+  updateParameters(_learningRate: number): void {
     // No parameters to update
   }
   
@@ -283,7 +283,7 @@ export class SigmoidModule implements NNModule {
     return gradInput;
   }
   
-  updateParameters(learningRate: number): void {
+  updateParameters(_learningRate: number): void {
     // No parameters to update
   }
   
@@ -341,7 +341,7 @@ export class ReLUModule implements NNModule {
     return gradInput;
   }
   
-  updateParameters(learningRate: number): void {
+  updateParameters(_learningRate: number): void {
     // No parameters to update
   }
   

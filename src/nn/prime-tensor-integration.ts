@@ -22,11 +22,8 @@ import {
   PrimeTensorContainer,
   PRIME_DIMENSIONS,
   FUNDAMENTAL_PRIMES,
-  PrimeShapedTensor,
   NestedTensorTuple
 } from './PrimeShapedTensors.js';
-import { Sequential } from './Container.js';
-import { ReLU, Tanh } from './Activation.js';
 import { MSECriterion } from './Criterion.js';
 
 /**
@@ -92,7 +89,6 @@ export class TimeCrystalBrainModel {
     
     // Create H3 input from cortical output (triplet: primary, secondary, context)
     const cortical = nestedTuple.dodecanion.tensor;
-    const batchSize = cortical.shape[0];
     
     // Replicate cortical output 3 times for H3 triplet
     const h3Input = this.createH3Input(cortical);
@@ -435,7 +431,7 @@ export function demonstratePrimeTensors(): void {
   
   // Example 2: Multi-sensory integration
   console.log('2. Creating Multi-Sensory Integration Model...');
-  const multiSensory = new MultiSensoryIntegrationModel(32, 24, 16);
+  const _multiSensory = new MultiSensoryIntegrationModel(32, 24, 16);
   console.log('   ✓ Visual input: 32D → 4D quaternion');
   console.log('   ✓ Auditory input: 24D → 4D quaternion');
   console.log('   ✓ Tactile input: 16D → 4D quaternion');

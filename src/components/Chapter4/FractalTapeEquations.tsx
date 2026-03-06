@@ -191,7 +191,6 @@ export const FractalTapeEquations: React.FC = () => {
 
         {/* Projection rays */}
         {[100, 150, 200, 250, 300, 350, 400, 450].map((x, i) => {
-          const distFromCenter = Math.abs(x - 300);
           const projectionY = 150 - Math.sqrt(Math.max(0, 80*80 - (x-300)*(x-300)));
           const color = i % 2 === 0 ? 'rgba(147, 51, 234, 0.5)' : 'rgba(6, 182, 212, 0.5)';
           

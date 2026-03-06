@@ -663,7 +663,6 @@ export class Conv1DModule implements NNModule {
     private useBias: boolean = true
   ) {
     // Weight shape: [outChannels, inChannels, kernelSize]
-    const weightSize = outChannels * inChannels * kernelSize;
     const stdv = 1 / Math.sqrt(inChannels * kernelSize);
 
     this.weight = this.createTensor(
@@ -1119,12 +1118,12 @@ export class LSTMModule implements NNModule {
     const gradInput = this.createTensor(input.shape, 'grad_lstm_input');
 
     // Initialize gradients for hidden and cell states
-    let dh = new Float32Array(batchSize * this.hiddenSize);
-    let dc = new Float32Array(batchSize * this.hiddenSize);
+    const dh = new Float32Array(batchSize * this.hiddenSize);
+    const dc = new Float32Array(batchSize * this.hiddenSize);
 
     for (let t = seqLen - 1; t >= 0; t--) {
       const gates = this.gateCache[t];
-      const hPrev = t > 0 ? this.hiddenCache[t - 1] : null;
+      const _hPrev = t > 0 ? this.hiddenCache[t - 1] : null;
       const cPrev = t > 0 ? this.cellCache[t - 1] : null;
       const c = this.cellCache[t];
 
@@ -1298,7 +1297,7 @@ export class GRUModule implements NNModule {
     return output;
   }
 
-  backward(input: GgmlTensor, gradOutput: GgmlTensor): GgmlTensor {
+  backward(input: GgmlTensor, _gradOutput: GgmlTensor): GgmlTensor {
     return this.createTensor(input.shape, 'grad_gru_input');
   }
 
@@ -1500,7 +1499,7 @@ export class MultiHeadAttentionModule implements NNModule {
     return result;
   }
 
-  backward(input: GgmlTensor, gradOutput: GgmlTensor): GgmlTensor {
+  backward(input: GgmlTensor, _gradOutput: GgmlTensor): GgmlTensor {
     return this.createTensor(input.shape, 'grad_mha_input');
   }
 

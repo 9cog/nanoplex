@@ -478,7 +478,7 @@ export class RMSpropOptimizer implements Optimizer {
           // Update running average of squared gradients
           squareAvg[i] = this.alpha * squareAvg[i] + (1 - this.alpha) * g_t * g_t;
 
-          let avg = Math.sqrt(squareAvg[i]) + this.eps;
+          const avg = Math.sqrt(squareAvg[i]) + this.eps;
 
           if (groupMomentum > 0) {
             const buf = this.momentum_buffer.get(param.id)!;

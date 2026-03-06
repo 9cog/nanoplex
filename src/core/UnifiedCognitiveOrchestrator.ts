@@ -10,10 +10,10 @@
  * - Unified API for cognitive operations
  */
 
-import { GgmlTensor, GgmlTensorKernel, AtomSpaceTensorConfig } from './GgmlTensorKernel';
-import { NNModule, SequentialModule, LinearModule, Trainer, MSECriterion } from './LearnabilityEmbeddings';
+import { GgmlTensor, GgmlTensorKernel } from './GgmlTensorKernel';
+import { NNModule, SequentialModule, LinearModule, MSECriterion } from './LearnabilityEmbeddings';
 import { ExtendedArchitectures, MultiHeadAttentionModule, LSTMModule, BatchNormModule, DropoutModule } from './ExtendedNeuralArchitectures';
-import { Optimizers, Schedulers, createOptimizer, createScheduler, Optimizer, LRScheduler } from './AdvancedOptimizers';
+import { createOptimizer, createScheduler, Optimizer, LRScheduler } from './AdvancedOptimizers';
 import { CognitiveGripFabric, CognitiveIdea, OperationalImplementation } from './CognitiveGripFabric';
 import { registerExtendedBridges } from './ExtendedLanguageBridges';
 import { UniversalKernelGenerator, GeneratedKernel, DomainSpecification } from './UniversalKernelGenerator';
@@ -498,7 +498,7 @@ export class UnifiedCognitiveOrchestrator {
     const protoNet = this.protoNetworks.get(learnerId);
     if (protoNet) {
       const prototypes = protoNet.buildPrototypes(task.support_set);
-      const { predictions, probabilities } = protoNet.classify(task.query_set, prototypes);
+      const { predictions, probabilities: _probabilities } = protoNet.classify(task.query_set, prototypes);
 
       // Compute accuracy
       let correct = 0;
@@ -667,7 +667,7 @@ export class UnifiedCognitiveOrchestrator {
     }
   }
 
-  private executePatternRecognition(input: unknown): unknown {
+  private executePatternRecognition(_input: unknown): unknown {
     // Use kernel for pattern recognition
     const kernel = this.kernels.get('consciousness') || this.kernelGenerator.generateEchoKern();
     return {

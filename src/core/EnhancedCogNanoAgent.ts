@@ -14,8 +14,6 @@ import {
   LinearModule,
   TanhModule,
   SigmoidModule,
-  ReLUModule,
-  EmbeddingModule,
   MSECriterion,
   Trainer
 } from './LearnabilityEmbeddings';

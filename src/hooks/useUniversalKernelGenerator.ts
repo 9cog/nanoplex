@@ -237,7 +237,6 @@ export function useUniversalKernelGenerator() {
       console.error('Failed to optimize kernel:', error);
       setState(prev => ({ ...prev, isGenerating: false }));
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.activeKernel]);
 
   /**

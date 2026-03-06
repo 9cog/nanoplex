@@ -508,8 +508,8 @@ export class UniversalKernelGenerator {
    */
   public measureGrip(
     coefficients: number[],
-    domain: DomainSpecification,
-    context: ContextTensor
+    _domain: DomainSpecification,
+    _context: ContextTensor
   ): GripMetrics {
     // Contact: How well kernel touches domain
     const contact = Math.exp(
