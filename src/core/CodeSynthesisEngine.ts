@@ -1242,12 +1242,12 @@ export class CodeOptimizer {
       case NodeType.BLOCK:
         return { ...node, statements: (node as BlockNode).statements.map(mapper) } as BlockNode;
       case NodeType.IF: {
-        const ifNode2 = node as IfNode;
+        const ifNodeToMap = node as IfNode;
         return {
           ...node,
-          condition: mapper(ifNode2.condition),
-          consequent: mapper(ifNode2.consequent) as BlockNode,
-          alternate: ifNode2.alternate ? mapper(ifNode2.alternate) as BlockNode | IfNode : undefined
+          condition: mapper(ifNodeToMap.condition),
+          consequent: mapper(ifNodeToMap.consequent) as BlockNode,
+          alternate: ifNodeToMap.alternate ? mapper(ifNodeToMap.alternate) as BlockNode | IfNode : undefined
         } as IfNode;
       }
       case NodeType.BINARY_OP:

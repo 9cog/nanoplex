@@ -516,8 +516,6 @@ export class MultiTaskLearner {
     // Compute loss for each task
     for (const [taskId, examples] of taskBatches) {
       const head = this.taskHeads.get(taskId);
-      // Weight is available for future weighted loss implementations
-      const _weight = this.taskWeights.get(taskId) ?? 1.0;
 
       if (!head) continue;
 
